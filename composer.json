@@ -11,8 +11,9 @@
 			"role" : "Developer"
 		}
 	],
+	"minimum-stability": "dev",
 	"require": {
-        "pradosoft/prado": "~4.2"
+        "pradosoft/prado": "~4.2 || dev-master"
 	},
 	"provide" : {
 		"pradosoft/prado-wsat" : "4.2.0"
