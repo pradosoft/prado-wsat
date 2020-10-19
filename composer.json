@@ -1,0 +1,30 @@
+{
+	"name": "pradosoft/prado-wsat",
+	"type": "library",
+	"description": "PRADO Web Site Administration Tool",
+	"homepage": "https://github.com/pradosoft/prado-wsat",
+	"license" : "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Daniel Sampedro",
+			"email": "darthdaniel85@gmail.com",
+			"role" : "Developer"
+		}
+	],
+	"require": {
+        "pradosoft/prado": "~4.2"
+	},
+	"provide" : {
+		"pradosoft/prado-wsat" : "4.2.0"
+	},
+    "autoload": {
+        "psr-4": {
+            "Prado\\Wsat\\": "src"
+        }
+    },
+	"support" : {
+		"issues" : "https://github.com/pradosoft/prado-wsat/issues",
+		"source" : "https://github.com/pradosoft/prado-wsat",
+		"docs" : "http://www.pradoframework.net/site/documentation"
+	}
+}
