@@ -60,6 +60,9 @@ class TWsatService extends TPageService
 			throw new TConfigurationException("You need to specify the Password attribute.");
 		}
 
+		Prado::setPathOfAlias('Prado\Wsat', __DIR__);
+		Prado::setPathOfAlias('Prado\Wsat\themes', __DIR__ . '/themes');
+		Prado::setPathOfAlias('Prado\Wsat\pages', __DIR__ . '/pages');
 		$this->setDefaultPage("TWsatHome");
 		$this->_startThemeManager();
 		parent::init($config);
@@ -74,7 +77,7 @@ class TWsatService extends TPageService
 	private function _startThemeManager()
 	{
 		$themeManager = new TThemeManager;
-		$themeManager->BasePath = "Prado\Wsat\themes";
+		$themeManager->BasePath = 'Prado\Wsat\themes';
 		$url = Prado::getApplication()->getAssetManager()->publishFilePath(Prado::getPathOfNamespace('Prado\Wsat'));
 		$themeManager->BaseUrl = "$url/themes";
 
