@@ -13,10 +13,7 @@
 	],
 	"minimum-stability": "dev",
 	"require": {
-        "pradosoft/prado": "dev-master"
-	},
-	"provide" : {
-		"pradosoft/prado-wsat" : "4.2.0"
+        "pradosoft/prado": "^4"
 	},
     "autoload": {
         "psr-4": {
