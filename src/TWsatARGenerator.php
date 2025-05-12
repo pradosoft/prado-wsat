@@ -75,9 +75,9 @@ class TWsatARGenerator extends TWsatBaseGenerator
 			$tableInfo = $this->_dbMetaData->getTableInfo($tableName);
 			if (!empty($this->_relations)) {
 				// Cancel generation of M-M relationships middle table
-								if (count($tableInfo->getPrimaryKeys()) === 2 && count($tableInfo->getColumns()) === 2) {//M-M relationships
-										continue;
-								}
+				if (count($tableInfo->getPrimaryKeys()) === 2 && count($tableInfo->getColumns()) === 2) {//M-M relationships
+						continue;
+				}
 			}
 			$this->_commonGenerate($tableName, $tableInfo);
 		}
@@ -96,18 +96,18 @@ class TWsatARGenerator extends TWsatBaseGenerator
 				$table_name_mm2 = $fks[1]["table"];
 
 				$this->_relations[$table_name_mm][] = [
-										"prop_name" => strtolower($table_name_mm2),
-										"rel_type" => "self::MANY_TO_MANY",
-										"ref_class_name" => $this->_getProperClassName($table_name_mm2),
-										"prop_ref" => $table_name
-								];
+					"prop_name" => strtolower($table_name_mm2),
+					"rel_type" => "self::MANY_TO_MANY",
+					"ref_class_name" => $this->_getProperClassName($table_name_mm2),
+					"prop_ref" => $table_name
+				];
 
 				$this->_relations[$table_name_mm2][] = [
-										"prop_name" => strtolower($table_name_mm),
-										"rel_type" => "self::MANY_TO_MANY",
-										"ref_class_name" => $this->_getProperClassName($table_name_mm),
-										"prop_ref" => $table_name
-								];
+					"prop_name" => strtolower($table_name_mm),
+					"rel_type" => "self::MANY_TO_MANY",
+					"ref_class_name" => $this->_getProperClassName($table_name_mm),
+					"prop_ref" => $table_name
+				];
 				continue;
 			}
 			foreach ($fks as $fk_data) {//1-M relationships
@@ -116,18 +116,18 @@ class TWsatARGenerator extends TWsatBaseGenerator
 				$fk_prop = key($fk_data["keys"]);
 
 				$this->_relations[$owner_table][] = [
-										"prop_name" => strtolower($slave_table),
-										"rel_type" => "self::HAS_MANY",
-										"ref_class_name" => $this->_getProperClassName($slave_table),
-										"prop_ref" => $fk_prop
-								];
+					"prop_name" => strtolower($slave_table),
+					"rel_type" => "self::HAS_MANY",
+					"ref_class_name" => $this->_getProperClassName($slave_table),
+					"prop_ref" => $fk_prop
+				];
 
 				$this->_relations[$slave_table][] = [
-										"prop_name" => strtolower($owner_table),
-										"rel_type" => "self::BELONGS_TO",
-										"ref_class_name" => $this->_getProperClassName($owner_table),
-										"prop_ref" => $fk_prop
-								];
+					"prop_name" => strtolower($owner_table),
+					"rel_type" => "self::BELONGS_TO",
+					"ref_class_name" => $this->_getProperClassName($owner_table),
+					"prop_ref" => $fk_prop
+				];
 			}
 		}
 	}
@@ -181,13 +181,12 @@ class TWsatARGenerator extends TWsatBaseGenerator
 			return "";
 		}
 
-		$code = "\tpublic static \$RELATIONS = array (";
+		$code = "\tpublic static \$RELATIONS = [";
 		foreach ($this->_relations[$tablename] as $rel_data) {
-			$code .= "\n\t\t'" . $rel_data["prop_name"] . "' => array(" . $rel_data["rel_type"] . ", '" . $rel_data["ref_class_name"] . "', '" . $rel_data["prop_ref"] . "'),";
+			$code .= "\n\t\t'" . $rel_data["prop_name"] . "' => [ " . $rel_data["rel_type"] . ", '" . $rel_data["ref_class_name"] . "', '" . $rel_data["prop_ref"] . "' ],";
 		}
 
-		$code = substr($code, 0, -1);
-		$code .= "\n\t);";
+		$code .= "\n\t];";
 		return $code;
 	}
 
@@ -231,7 +230,7 @@ class $classname extends TActiveRecord
 $props
 
 	public static function finder(\$className=__CLASS__) {
-                return parent::finder(\$className);
+		return parent::finder(\$className);
 	}
 
 $relations
