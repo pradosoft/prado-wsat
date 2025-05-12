@@ -175,6 +175,20 @@ class TWsatARGenerator extends TWsatBaseGenerator
 		return $prop;
 	}
 
+	private function _renderRelationProps($tablename)
+	{
+		if (!isset($this->_relations[$tablename])) {
+			return "";
+		}
+
+		$code = '';
+		foreach ($this->_relations[$tablename] as $rel_data) {
+			$code .= "\n\tpublic \$" . $rel_data["prop_name"] . ";";
+		}
+
+		return $code;
+	}
+
 	private function _renderRelations($tablename)
 	{
 		if (!isset($this->_relations[$tablename])) {
@@ -214,6 +228,7 @@ class TWsatARGenerator extends TWsatBaseGenerator
 	protected function generateClass($properties, $tablename, $classname, $toString)
 	{
 		$props = implode("\n", $properties);
+		$relprops = $this->_renderRelationProps($tablename);
 		$relations = $this->_renderRelations($tablename);
 		$date = date('Y-m-d h:i:s');
 		$env_user = getenv("username");
@@ -228,6 +243,7 @@ class $classname extends TActiveRecord
 	const TABLE='$tablename';
 
 $props
+$relprops
 
 	public static function finder(\$className=__CLASS__) {
 		return parent::finder(\$className);
