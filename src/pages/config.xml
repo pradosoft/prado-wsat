@@ -2,8 +2,8 @@
 
 <configuration>
     <modules>
-        <module id="session" class="THttpSession" CookieMode="Allow" UseCustomStorage="false"
-                AutoStart="true" GCProbability="1" UseTransparentSessionID="true" TimeOut="3600" />
+        <module id="session" class="THttpSession" CookieMode="Only" UseCustomStorage="false"
+                AutoStart="true" GCProbability="1" TimeOut="3600" />
     </modules>
     <pages Theme="PradoSoft" MasterClass="Prado\Wsat\pages\layout\TWsatLayout" />
 </configuration>
